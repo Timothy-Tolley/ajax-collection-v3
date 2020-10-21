@@ -472,9 +472,9 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@process-creative/pc-slate-tools@git+https://github.com/Process-Creative/pc-slate-tools":
+"@timothy-tolley/pc-slate-tools@git+https://github.com/timothy-tolley/pc-slate-tools":
   version "1.4.3"
-  resolved "git+https://github.com/Process-Creative/pc-slate-tools#19e29c36b48ee922649174c551db0b446d79d57e"
+  resolved "git+https://github.com/timothy-tolley/pc-slate-tools#19e29c36b48ee922649174c551db0b446d79d57e"
   dependencies:
     jquery "^3.4.1"
     js-cookie "^2.2.0"

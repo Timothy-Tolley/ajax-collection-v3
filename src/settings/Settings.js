@@ -17,7 +17,7 @@
 */
 
 import { TagFilter, OPERATION_AND } from './../filter/';
-import { handlize } from '@process-creative/pc-slate-tools';
+import { handlize } from '@timothy-tolley/pc-slate-tools';
 
 export class Settings {
   constructor(template) {

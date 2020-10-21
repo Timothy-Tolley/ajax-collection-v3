@@ -30,7 +30,7 @@ var __assign = (this && this.__assign) || function () {
 exports.__esModule = true;
 exports.Settings = void 0;
 var filter_1 = require("./../filter/");
-var pc_slate_tools_1 = require("@process-creative/pc-slate-tools");
+var pc_slate_tools_1 = require("@timothy-tolley/pc-slate-tools");
 var Settings = /** @class */ (function () {
     function Settings(template) {
         this.template = template;

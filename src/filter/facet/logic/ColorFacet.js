@@ -1,6 +1,6 @@
 import { VariantOptionFacet } from "./VariantOptionFacet";
 import { COLOR_OPTIONS } from './../../../constant/Constants';
-import { handlize } from '@process-creative/pc-slate-tools';
+import { handlize } from '@timothy-tolley/pc-slate-tools';
 
 export class ColorFacet extends VariantOptionFacet {
   constructor(params) {

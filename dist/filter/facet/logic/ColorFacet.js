@@ -27,7 +27,7 @@ exports.__esModule = true;
 exports.ColorFacet = void 0;
 var VariantOptionFacet_1 = require("./VariantOptionFacet");
 var Constants_1 = require("./../../../constant/Constants");
-var pc_slate_tools_1 = require("@process-creative/pc-slate-tools");
+var pc_slate_tools_1 = require("@timothy-tolley/pc-slate-tools");
 var ColorFacet = /** @class */ (function (_super) {
     __extends(ColorFacet, _super);
     function ColorFacet(params) {

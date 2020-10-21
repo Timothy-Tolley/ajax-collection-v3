@@ -1,5 +1,5 @@
 import { SortMethod } from './SortMethod';
-import { liquidToDate } from '@process-creative/pc-slate-tools';
+import { liquidToDate } from '@timothy-tolley/pc-slate-tools';
 
 export const CreatedAscending = {
   ...SortMethod,

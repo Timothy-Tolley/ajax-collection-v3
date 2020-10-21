@@ -3,7 +3,7 @@ exports.__esModule = true;
 exports.Data = void 0;
 var Consts = require("./../constant/Constants");
 var Errors = require("./../error/Errors");
-var pc_slate_tools_1 = require("@process-creative/pc-slate-tools");
+var pc_slate_tools_1 = require("@timothy-tolley/pc-slate-tools");
 var Data = /** @class */ (function () {
     function Data(template) {
         this.template = template;

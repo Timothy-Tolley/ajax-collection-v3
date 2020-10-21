@@ -1,5 +1,5 @@
 import { Paginator } from './Paginator';
-import { getQueryParams } from '@process-creative/pc-slate-tools';
+import { getQueryParams } from '@timothy-tolley/pc-slate-tools';
 
 export class InfiniteScroll extends Paginator {
   constructor(template, params) {

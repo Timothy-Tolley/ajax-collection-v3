@@ -13,7 +13,7 @@ var __assign = (this && this.__assign) || function () {
 exports.__esModule = true;
 exports.CreatedDescending = exports.CreatedAscending = void 0;
 var SortMethod_1 = require("./SortMethod");
-var pc_slate_tools_1 = require("@process-creative/pc-slate-tools");
+var pc_slate_tools_1 = require("@timothy-tolley/pc-slate-tools");
 exports.CreatedAscending = __assign(__assign({}, SortMethod_1.SortMethod), { name: 'Date, Oldest First', sort: function (collection, variantData) {
         return variantData.sort(function (l, r) {
             if (!l.published_at_date)

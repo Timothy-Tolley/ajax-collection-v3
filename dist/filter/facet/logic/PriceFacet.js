@@ -15,7 +15,7 @@ var __extends = (this && this.__extends) || (function () {
 exports.__esModule = true;
 exports.PriceFacet = void 0;
 var Facet_1 = require("./../Facet");
-var pc_slate_tools_1 = require("@process-creative/pc-slate-tools");
+var pc_slate_tools_1 = require("@timothy-tolley/pc-slate-tools");
 var PriceFacet = /** @class */ (function (_super) {
     __extends(PriceFacet, _super);
     function PriceFacet(params) {

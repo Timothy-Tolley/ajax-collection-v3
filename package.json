@@ -30,7 +30,7 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/procescreative/ajax-collection-v3#readme",
   "dependencies": {
-    "@process-creative/pc-slate-tools": "git+https://github.com/timothy-tolley/pc-slate-tools",
+    "@timothy-tolley/pc-slate-tools": "git+https://github.com/timothy-tolley/pc-slate-tools",
     "core-js": "^3.2.1",
     "jquery": "^3.3.1",
     "ts-polyfill": "^3.5.3"

@@ -1,6 +1,6 @@
 import * as $ from 'jquery';
 import { ColorFacet } from '../logic/ColorFacet';
-import { handlize } from '@process-creative/pc-slate-tools';
+import { handlize } from '@timothy-tolley/pc-slate-tools';
 
 export const SWATCH_FILTER = '[data-swatch-value]';
 

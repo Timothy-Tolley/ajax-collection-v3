@@ -1,7 +1,7 @@
 import * as Consts from './../constant/Constants';
 import * as Errors from './../error/Errors';
 
-import { jsonFromjQuery } from '@process-creative/pc-slate-tools'
+import { jsonFromjQuery } from '@timothy-tolley/pc-slate-tools'
 
 export class Data {
   constructor(template) {

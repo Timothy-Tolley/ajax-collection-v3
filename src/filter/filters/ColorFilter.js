@@ -1,6 +1,6 @@
 import { VariantOptionFilter } from './VariantOptionFilter';
 import { COLOR_OPTIONS } from './../../constant/Constants';
-import { handlize } from '@process-creative/pc-slate-tools';
+import { handlize } from '@timothy-tolley/pc-slate-tools';
 
 export class ColorFilter extends VariantOptionFilter {
   constructor(template, handle, operation, defaultMode) {

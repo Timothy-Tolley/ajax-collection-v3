@@ -8,7 +8,7 @@
 
 import * as Consts from './constant/Constants';
 import * as Errors from './error/Errors';
-import { generatePicture, escapeString } from '@process-creative/pc-slate-tools';
+import { generatePicture, escapeString } from '@timothy-tolley/pc-slate-tools';
 
 import { Cache } from './cache/Cache';
 import { Data } from './data/Data';

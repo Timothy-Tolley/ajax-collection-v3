@@ -16,7 +16,7 @@ exports.__esModule = true;
 exports.ColorSwatchFacet = exports.SWATCH_FILTER = void 0;
 var $ = require("jquery");
 var ColorFacet_1 = require("../logic/ColorFacet");
-var pc_slate_tools_1 = require("@process-creative/pc-slate-tools");
+var pc_slate_tools_1 = require("@timothy-tolley/pc-slate-tools");
 exports.SWATCH_FILTER = '[data-swatch-value]';
 var ColorSwatchFacet = /** @class */ (function (_super) {
     __extends(ColorSwatchFacet, _super);

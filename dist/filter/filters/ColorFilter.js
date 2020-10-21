@@ -16,7 +16,7 @@ exports.__esModule = true;
 exports.ColorFilter = void 0;
 var VariantOptionFilter_1 = require("./VariantOptionFilter");
 var Constants_1 = require("./../../constant/Constants");
-var pc_slate_tools_1 = require("@process-creative/pc-slate-tools");
+var pc_slate_tools_1 = require("@timothy-tolley/pc-slate-tools");
 var ColorFilter = /** @class */ (function (_super) {
     __extends(ColorFilter, _super);
     function ColorFilter(template, handle, operation, defaultMode) {

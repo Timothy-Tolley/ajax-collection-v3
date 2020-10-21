@@ -1,5 +1,5 @@
 import { Facet } from './../Facet';
-import { printMoney } from '@process-creative/pc-slate-tools';
+import { printMoney } from '@timothy-tolley/pc-slate-tools';
 
 export class PriceFacet extends Facet {
   constructor(params) {

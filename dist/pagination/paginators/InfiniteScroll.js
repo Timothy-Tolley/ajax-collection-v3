@@ -15,7 +15,7 @@ var __extends = (this && this.__extends) || (function () {
 exports.__esModule = true;
 exports.InfiniteScroll = void 0;
 var Paginator_1 = require("./Paginator");
-var pc_slate_tools_1 = require("@process-creative/pc-slate-tools");
+var pc_slate_tools_1 = require("@timothy-tolley/pc-slate-tools");
 var InfiniteScroll = /** @class */ (function (_super) {
     __extends(InfiniteScroll, _super);
     function InfiniteScroll(template, params) {

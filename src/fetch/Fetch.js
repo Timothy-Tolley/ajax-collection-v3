@@ -1,4 +1,4 @@
-import { shopifyGet, getQueryParams } from '@process-creative/pc-slate-tools';
+import { shopifyGet, getQueryParams } from '@timothy-tolley/pc-slate-tools';
 import * as Errors from './../error/Errors';
 
 export class Fetch {
