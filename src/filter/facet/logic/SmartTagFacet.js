@@ -1,8 +1,10 @@
 import { TagFacet } from './TagFacet';
 
 export const getTagsWithPrefixes = (prefixes, tags, token) => {
-  let tags = tags.filter(t => {
-    let [ prefix ] = t.split(token);
+  tags = tags.filter(t => {
+    let split = t.split(token);
+    if(split.length < 2) return;
+    let [ prefix ] = split;
     return prefixes.some(p => p.toLowerCase() == prefix.toLowerCase());
   });
 

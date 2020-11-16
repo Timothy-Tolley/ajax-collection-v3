@@ -8,21 +8,8 @@ export class InfiniteScroll extends Paginator {
     this.onPageLoad(getQueryParams());
     $(window).on('scroll', e => this.onWindowScroll(e));
   }
-
-  paginate(variants) {
-    let perPage = this.pagination.getPerPage();
-    let page = this.pagination.getCurrentPage();
-
-    let start = 0;
-    let end = Math.min(variants.length, start+(perPage*page));
-
-    var paginated = [];
-    for(let i = start; i < end; i++) {
-      paginated.push(variants[i]);
-    }
-
-    return paginated;
-  }
+  
+  getStart() { return 0; }
 
   onWindowScroll(e) {
     if(this.timeout) return;

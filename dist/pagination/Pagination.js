@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 exports.__esModule = true;
 exports.Pagination = exports.VIEW_ALL_COUNT = void 0;
 var paginators_1 = require("./paginators/");
@@ -8,6 +19,9 @@ var Pagination = /** @class */ (function () {
         this.template = template;
         //Initialize a default paginator.
         this.paginator = new paginators_1.Paginator(template, this);
+        //Content Aware Pagination, this will consider content blocks as taking up
+        //a respective product thumbnail slot
+        this.paginateContentAware = false;
     }
     Pagination.prototype.getCurrentPage = function () {
         if (this.isViewAll())
@@ -18,12 +32,29 @@ var Pagination = /** @class */ (function () {
             page = 1;
         return this.clampPage(page);
     };
+    Pagination.prototype.getTotalPagesWithoutOffset = function () {
+        if (this.isViewAll())
+            return 1;
+        var total = this.template.draw.getUnpaginatedVariantCount();
+        if (!total)
+            return 1;
+        return Math.ceil(total / this.getPerPage());
+    };
     Pagination.prototype.getTotalPages = function () {
         if (this.isViewAll())
             return 1;
         var total = this.template.draw.getUnpaginatedVariantCount();
         if (!total)
             return 1;
+        var pagesWithoutOffset = this.getTotalPagesWithoutOffset();
+        //What we're doing here is adding the page offsets.
+        //e.g. if There are 10 products per page, and we're trying to print 19 but
+        //the offset is -3 then we need to forcibly add page 3
+        total -= this.getEndOffset({
+            page: pagesWithoutOffset,
+            perPage: this.getPerPage(),
+            paginator: this.paginator
+        });
         return Math.ceil(total / this.getPerPage());
     };
     Pagination.prototype.getPerPage = function () {
@@ -67,6 +98,34 @@ var Pagination = /** @class */ (function () {
         this.paginator.onPerPageChange();
         this.template.onPerPageChange(this.getPerPage());
     };
+    Pagination.prototype.getOffsetDueToContentBlocks = function (params) {
+        var _this = this;
+        //Count the offset based on the size of each content block
+        var cb = this.template.content.getContentBlocksForPage(params);
+        if (!cb || !cb.length)
+            return 0;
+        return cb.reduce(function (x, cb) { return x + _this.template.getContentBlockSize(__assign(__assign({}, params), { contentBlock: cb })); }, 0);
+    };
+    Pagination.prototype.getStartOffset = function (params) {
+        if (this.isViewAll())
+            return 0;
+        var offset = 0;
+        //Add the previous pages' end offset (basically the "last index we rendered")
+        if (params.page > 1)
+            offset += this.getEndOffset(__assign(__assign({}, params), { page: params.page - 1 }));
+        return offset;
+    };
+    Pagination.prototype.getEndOffset = function (params) {
+        if (this.isViewAll())
+            return 0;
+        //Start with the start offset of THIS page
+        var offset = this.getStartOffset(params);
+        //Offset this pages' content blocks
+        if (this.paginateContentAware && this.template.content) {
+            offset -= this.getOffsetDueToContentBlocks(params);
+        }
+        return offset;
+    };
     Pagination.prototype.viewAll = function () {
         this.setPerPage(exports.VIEW_ALL_COUNT);
     };
@@ -74,7 +133,7 @@ var Pagination = /** @class */ (function () {
         if (this.isViewAll())
             return variants;
         if (this.paginator)
-            return this.paginator.paginate(variants);
+            variants = this.paginator.paginate(variants);
         return variants;
     };
     Pagination.prototype.clampPage = function (page) {

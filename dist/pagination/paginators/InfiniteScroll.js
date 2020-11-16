@@ -24,17 +24,7 @@ var InfiniteScroll = /** @class */ (function (_super) {
         $(window).on('scroll', function (e) { return _this.onWindowScroll(e); });
         return _this;
     }
-    InfiniteScroll.prototype.paginate = function (variants) {
-        var perPage = this.pagination.getPerPage();
-        var page = this.pagination.getCurrentPage();
-        var start = 0;
-        var end = Math.min(variants.length, start + (perPage * page));
-        var paginated = [];
-        for (var i = start; i < end; i++) {
-            paginated.push(variants[i]);
-        }
-        return paginated;
-    };
+    InfiniteScroll.prototype.getStart = function () { return 0; };
     InfiniteScroll.prototype.onWindowScroll = function (e) {
         var _this = this;
         if (this.timeout)

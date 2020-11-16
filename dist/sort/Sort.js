@@ -64,7 +64,7 @@ var Sort = /** @class */ (function () {
         var method = this.getSortMethod();
         if (!method)
             return variants;
-        var sorted = method.sort(this.template, variants);
+        var sorted = method.sort(this.template, variants, method);
         if (method.reverse)
             sorted.reverse();
         if (this.template.onSort)

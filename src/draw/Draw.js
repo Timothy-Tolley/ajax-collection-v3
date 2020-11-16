@@ -185,10 +185,8 @@ export class Draw {
       let prev = element.prev();
       if(previous && !prev.is(previous)) element.insertAfter(previous);
       previous = element;//Now I am the new previous, the next item will go after me.
+      if(previous.length > 1) previous = $(previous[0]);
     }
-
-    //For testing, we're trying to make sure we don't draw too often
-    console.log("Drawing");
 
     //Update the internal list of drawn products.
     this.drawnProducts = draw;

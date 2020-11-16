@@ -175,6 +175,10 @@ var AjaxCollectionTemplate = /** @class */ (function () {
             return -1;
         return oi;
     };
+    AjaxCollectionTemplate.prototype.getContentBlockSize = function (params) {
+        //Returns the size (in product thumbnails) of the content block
+        return 1;
+    };
     //Some events, your collection may chose to use these
     AjaxCollectionTemplate.prototype.onProductsFetched = function (products) { }; //Gets called every time more products are fetched, but BEFORE they are printed.
     AjaxCollectionTemplate.prototype.onVariantsDrawn = function (variants) { }; //Gets called every time AFTER variants have been drawn.

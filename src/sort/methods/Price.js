@@ -1,12 +1,15 @@
+import { ManualSort, ManualSortVariants } from './Manual';
 import { SortMethod } from './SortMethod';
 
 export const PriceAscending = {
   ...SortMethod,
   handle: "price-ascending",
   name: "Price, Low to High",
-  sort: (collection, variantData) => {
+  sort: (template, variantData, method) => {
     return variantData.sort((l,r) => {
-      return l.price - r.price;
+      if(l.price > r.price) return 1;
+      if(l.price < r.price) return -1;
+      return ManualSortVariants({ template, method, l, r });
     });
   }
 };

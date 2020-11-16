@@ -29,17 +29,8 @@ var LoadMore = /** @class */ (function (_super) {
         e.stopPropagation();
         this.pagination.setPage(this.pagination.getCurrentPage() + 1);
     };
-    LoadMore.prototype.paginate = function (variants) {
-        var perPage = this.pagination.getPerPage();
-        var page = this.pagination.getCurrentPage();
-        var start = 0;
-        var end = Math.min(variants.length, start + (perPage * page));
-        var paginated = [];
-        for (var i = start; i < end; i++) {
-            paginated.push(variants[i]);
-        }
-        return paginated;
-    };
+    LoadMore.prototype.getStart = function () { return 0; };
+    LoadMore.prototype.getEnd = function (params) { return params.perPage * params.page; };
     LoadMore.prototype.updateVisibility = function () {
         if (this.pagination.getCurrentPage() >= this.pagination.getTotalPages()) {
             return this.container.addClass(Constants_1.CLASS_HIDDEN);

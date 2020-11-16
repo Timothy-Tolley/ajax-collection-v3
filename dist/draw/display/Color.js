@@ -3,10 +3,10 @@ exports.__esModule = true;
 exports.AllAvailableNonSaleColors = exports.AllAvailableSaleColors = exports.AllNonSaleColors = exports.AllSaleColors = exports.AllAvailableColors = exports.AllColors = void 0;
 var Constants_1 = require("./../../constant/Constants");
 var First_1 = require("./First");
-exports.AllColors = function (product, template, selectVariant) {
+exports.AllColors = function (product, template, selectVariant, fallback) {
     var colorIndex = template.getOptionIndex(product, Constants_1.COLOR_OPTIONS);
     if (colorIndex === -1)
-        return First_1.FirstAvailableVariant(product, template);
+        return (fallback || First_1.FirstAvailableVariant)(product, template);
     var doneColors = [];
     return product.variants.filter(function (v) {
         var color = v.options[colorIndex];

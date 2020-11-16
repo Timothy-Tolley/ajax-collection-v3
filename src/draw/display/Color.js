@@ -1,9 +1,9 @@
 import { COLOR_OPTIONS } from './../../constant/Constants';
 import { FirstAvailableVariant } from './First';
 
-export const AllColors = (product,template,selectVariant) => {
+export const AllColors = (product,template,selectVariant,fallback) => {
   let colorIndex = template.getOptionIndex(product, COLOR_OPTIONS);
-  if(colorIndex === -1) return FirstAvailableVariant(product,template);
+  if(colorIndex === -1) return (fallback||FirstAvailableVariant)(product,template);
   let doneColors = [];
 
   return product.variants.filter(v => {

@@ -205,6 +205,11 @@ export class AjaxCollectionTemplate {
     return oi;
   }
 
+  getContentBlockSize(params) {
+    //Returns the size (in product thumbnails) of the content block
+    return 1;
+  }
+
   //Some events, your collection may chose to use these
   onProductsFetched(products) {}//Gets called every time more products are fetched, but BEFORE they are printed.
   onVariantsDrawn(variants) {}//Gets called every time AFTER variants have been drawn.

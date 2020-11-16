@@ -15,4 +15,5 @@ __exportStar(require("./CheckboxFacet"), exports);
 __exportStar(require("./SlideFacet"), exports);
 __exportStar(require("./RangeFacet"), exports);
 __exportStar(require("./SelectFacet"), exports);
+__exportStar(require("./SwatchFacet"), exports);
 //# sourceMappingURL=index.js.map

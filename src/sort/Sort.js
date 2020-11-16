@@ -54,7 +54,7 @@ export class Sort {
   sortVariants(variants) {
     let method = this.getSortMethod();
     if(!method) return variants;
-    let sorted = method.sort(this.template, variants);
+    let sorted = method.sort(this.template, variants, method);
     if(method.reverse) sorted.reverse();
     if(this.template.onSort) return this.template.onSort({ method, variants, sorted });
     return sorted;

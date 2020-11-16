@@ -12,6 +12,15 @@ export class Content {
     this.contentBlocks = this.contentBlocks.map(cb => $(cb));
 
     this.contentBlocks.forEach( cb => cb.attr('data-original-index', cb.index()) );
+
+    $(window).on('resize', () => {
+      if(this.resizeTimeout) return;
+      this.resizeTimeout = setTimeout(() => this.redraw(), 200);
+    });
+
+    //Redraw now, but due to how blocks shift pagination we also queueDraw
+    this.redraw();
+    if(this.contentBlocks.length) this.template.draw.queueDraw();
   }
 
   addContentBlock(x) {
@@ -31,7 +40,18 @@ export class Content {
     this.redraw();
   }
 
+  getContentBlocksForPage(params) {
+    if(typeof this.template.getContentBlocksForPage === typeof undefined) return -1;
+    return this.template.getContentBlocksForPage({
+      ...params, contentBlocks: this.contentBlocks
+    });
+  }
+
   redraw() {
+    //Stop the resize timeout
+    clearTimeout(this.resizeTimeout);
+    this.resizeTimeout = null;
+
     //Detach all content blocks;
     let detach = [];
 

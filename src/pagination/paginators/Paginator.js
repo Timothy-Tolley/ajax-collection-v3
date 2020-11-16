@@ -4,20 +4,41 @@ export class Paginator {
     this.pagination = pagination || template.pagination;
   }
 
+  getOffsets(params) {
+    const params = { paginator: this, ...params };
+    return {
+      start: this.pagination.getStartOffset(params),
+      end: this.pagination.getEndOffset(params)
+    };
+  }
+
+  getStart(params) {
+    return (params.page - 1) * params.perPage;
+  }
+
+  getEnd(params) {
+    return params.start + params.perPage;
+  }
+
   paginate(variants) {
-    let perPage = this.pagination.getPerPage();
-    let page = this.pagination.getCurrentPage();
-
-    //Start & End Index in array
-    let start = (page-1) * perPage;
-    let end = Math.min(variants.length, start+perPage);
-
-    let paginated = [];
-    for(let i = start; i < end; i++) {
-      paginated.push(variants[i]);
+    const params = {
+      perPage: this.pagination.getPerPage(),
+      page: this.pagination.getCurrentPage(),
+      paginator: this,
+      variants
     }
 
-    return paginated;
+    //Start & End Index in array
+    params.start = this.getStart(params);
+    params.end = this.getEnd(params);
+
+    //Get Offsets
+    params.offsets = this.getOffsets(params);
+    params.start += params.offsets.start;
+    params.end += params.offsets.end;
+
+    //Paginated array
+    return variants.slice(params.start, Math.min(params.variants.length, params.end));
   }
 
   onPageChange() {}

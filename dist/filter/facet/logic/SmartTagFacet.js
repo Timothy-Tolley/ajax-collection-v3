@@ -16,8 +16,11 @@ exports.__esModule = true;
 exports.SmartTagFacet = exports.getTagsWithPrefixes = void 0;
 var TagFacet_1 = require("./TagFacet");
 exports.getTagsWithPrefixes = function (prefixes, tags, token) {
-    var tags = tags.filter(function (t) {
-        var prefix = t.split(token)[0];
+    tags = tags.filter(function (t) {
+        var split = t.split(token);
+        if (split.length < 2)
+            return;
+        var prefix = split[0];
         return prefixes.some(function (p) { return p.toLowerCase() == prefix.toLowerCase(); });
     });
     tags = tags.filter(function (t, i) {

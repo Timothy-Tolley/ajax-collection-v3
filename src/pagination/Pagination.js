@@ -1,3 +1,4 @@
+import { param } from 'jquery';
 import { Paginator } from './paginators/';
 
 export const VIEW_ALL_COUNT = 999999;
@@ -8,6 +9,10 @@ export class Pagination {
 
     //Initialize a default paginator.
     this.paginator = new Paginator(template,this);
+
+    //Content Aware Pagination, this will consider content blocks as taking up
+    //a respective product thumbnail slot
+    this.paginateContentAware = false;
   }
 
   getCurrentPage() {
@@ -19,11 +24,29 @@ export class Pagination {
     return this.clampPage(page);
   }
 
-  getTotalPages() {
+  getTotalPagesWithoutOffset() {
     if(this.isViewAll()) return 1;
-
     let total = this.template.draw.getUnpaginatedVariantCount();
     if(!total) return 1;
+    return Math.ceil(total / this.getPerPage());
+  }
+
+  getTotalPages() {
+    if(this.isViewAll()) return 1;
+    let total = this.template.draw.getUnpaginatedVariantCount();
+    if(!total) return 1;
+
+    let pagesWithoutOffset = this.getTotalPagesWithoutOffset();
+
+    //What we're doing here is adding the page offsets.
+    //e.g. if There are 10 products per page, and we're trying to print 19 but
+    //the offset is -3 then we need to forcibly add page 3
+    total -= this.getEndOffset({
+      page: pagesWithoutOffset,
+      perPage: this.getPerPage(),
+      paginator: this.paginator
+    });
+
     return Math.ceil(total / this.getPerPage());
   }
 
@@ -72,6 +95,38 @@ export class Pagination {
     this.template.onPerPageChange(this.getPerPage());
   }
 
+  getOffsetDueToContentBlocks(params) {
+    //Count the offset based on the size of each content block
+    let cb = this.template.content.getContentBlocksForPage(params);
+    if(!cb || !cb.length) return 0;
+    return cb.reduce((x,cb) =>  x + this.template.getContentBlockSize({
+      ...params, contentBlock: cb
+    }), 0);
+  }
+
+  getStartOffset(params) {
+    if(this.isViewAll()) return 0;
+    let offset = 0;
+
+    //Add the previous pages' end offset (basically the "last index we rendered")
+    if(params.page > 1) offset += this.getEndOffset({ ...params, page: params.page - 1 });
+
+    return offset;
+  }
+
+  getEndOffset(params) {
+    if(this.isViewAll()) return 0;
+
+    //Start with the start offset of THIS page
+    let offset = this.getStartOffset(params);
+
+    //Offset this pages' content blocks
+    if(this.paginateContentAware && this.template.content) {
+      offset -= this.getOffsetDueToContentBlocks(params);
+    }
+
+    return offset;
+  }
 
   viewAll() {
     this.setPerPage(VIEW_ALL_COUNT);
@@ -80,13 +135,12 @@ export class Pagination {
   paginateVariants(variants) {
     if(this.isViewAll()) return variants;
 
-    if(this.paginator) return this.paginator.paginate(variants);
+    if(this.paginator) variants = this.paginator.paginate(variants);
     return variants;
   }
 
   clampPage(page) {
     if(this.isViewAll()) return 1;
-
     return Math.min(Math.max(page, 1), this.getTotalPages());
   }
 
